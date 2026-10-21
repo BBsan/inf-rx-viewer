@@ -16,80 +16,265 @@
   --stats-table-bg: linear-gradient(to right bottom, rgba(170, 170, 170, 0.5) 0%,rgba(65, 67, 70, 0.5) 100%);
   --stats-link-active-color: linear-gradient(to right bottom, rgba(0, 174, 184, 0.5) 0%,rgba(0, 43, 109, 0.5) 100%);
   --track-item-bg: linear-gradient(to right bottom, rgba(0, 174, 184, 0.5) 0%,rgba(0, 43, 109, 0.5) 100%);
-
-  --beginner-color:#7bf1a8;
+  /* 譜面難易度の色 */
+  --beginner-color: #7bf1a8;
   --normal-color: #8ec5ff;
   --hyper-color: #ffdf20;
   --another-color: #ff2828;
   --leggendaria-color: #cb10fa;
-  --beginner-bg-color:#5db67f;
+  --beginner-bg-color: #5db67f;
   --normal-bg-color: #6990bb;
   --hyper-bg-color: #b19a17;
   --another-bg-color: #b41c1c;
   --leggendaria-bg-color: #940bb6;
+  /* ランプの背景色 */
+  --failed-bg-color: #ff4b00;
+  --assisted-bg-color: #9d23f5;
+  --easy-bg-color: #3cf523;
+  --clear-bg-color: #23aff5;
+  --hard-bg-color: #e1e1e1;
+  --ex-hard-bg-color: #ffd300;
+  /* DJ Levelの色 */
+  --aaa-bg-color: #ffc100;
+  --aa-bg-color: #b2b2b2;
+  --a-bg-color: #4ec7ad;
+  --b-bg-color: #d8ffff;
+  --c-bg-color: #8bffff;
+  --d-bg-color: #00f8ff;
+  --e-bg-color: #48a2ff;
+  --f-bg-color: #0025ff;
+  /* ランプの文字色 */
+  --no-play-color: #909090;
+  --assisted-color: #9d23f5;
+  --easy-color: #3cf523;
+  --clear-color: #23aff5;
+  --hard-color: #e1e1e1;
 }
 
+/* 
+  フォント
+ */
 .font-lub {
   font-family: 'WDXL Lubrifont JP N';
 }
-
 .font-yu {
   font-family: 'Yu Gothic UI';
 }
+
+/*
+  文字色、装飾関係
+*/
 .text-shadow-3 {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.99);
 }
-.failed {
-  color: #FF4B00;
+
+/*
+  グラデーション文字関係
+*/
+@property --color-start {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
 }
-.fc {
-  color: #60C9FA;
+@property --color-end {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+.gradient-text {
+  position: relative;
+  color: transparent;
+  display: inline-block;
+}
+.gradient-text::before {
+  text-shadow: none;
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, var(--color-start), var(--color-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  z-index: 1;
+}
+/*
+  アニメーション関係
+  文字と背景で使用
+*/
+@keyframes failedAnimation {
+  /* FAILED時のアニメーション */
+  0% {
+    --color-start: #ff4b00;
+    --color-end: #ff4b00;
+  }
+  100% {
+    --color-start: #3f1300;
+    --color-end: #3f1300;
+  }
+}
+@keyframes exAnimation {
+  /* EX-HARD時のアニメーション */
+  0% {
+    --color-start: #ffd300;
+    --color-end: #ffd300;
+  }
+  100% {
+    --color-start: #ff4b00;
+    --color-end: #ff4b00;
+  }
+}
+@keyframes fcAnimation {
+  /* FULL-COMBO時のアニメーション */
+  0% {
+    --color-start: #ff7e5f;
+    --color-end: #feb47b;
+  }
+  50% {
+    --color-start: #00c8ff;
+    --color-end: #0072ff;
+  }
+  100% {
+    --color-start: #f857a6;
+    --color-end: #ff5858;
+  }
+}
+
+/*
+  ランプ文字色
+*/
+.no-play {
+  color: var(--no-play-color);
+}
+.failed::before {
+  animation: failedAnimation 0.5s linear infinite alternate;
 }
 .assisted {
-  color: #9D23F5;
+  color: var(--assisted-color);
 }
 .easy {
-  color: #3CF523;
+  color: var(--easy-color);
 }
 .clear {
-  color: #23AFF5;
+  color: var(--clear-color);
 }
 .hard {
-  color: #E1E1E1;
+  color: var(--hard-color);
 }
-.ex-hard {
-  color: #FFD300;
+.ex-hard::before {
+  animation: exAnimation 0.5s linear infinite alternate;
 }
-
-.no-play {
-  color: #909090;
+.fc::before {
+  animation: fcAnimation 0.5s linear infinite alternate;
 }
-
+/* ★で使う文字色 */
 .beginner {
   color: var(--beginner-color);
 }
-
 .normal {
   color: var(--normal-color);
 }
-
 .hyper {
   color: var(--hyper-color);
 }
-
 .another {
   color: var(--another-color);
 }
-
 .leggendaria {
   color: var(--leggendaria-color);
 }
+/* スコア棒グラフの色 */
+.bg-beginner {
+  background-color: var(--beginner-bg-color);
+}
+.bg-normal {
+  background-color: var(--normal-bg-color);
+}
+.bg-hyper {
+  background-color: var(--hyper-bg-color);
+}
+.bg-another {
+  background-color: var(--another-bg-color);
+}
+.bg-leggendaria {
+  background-color: var(--leggendaria-bg-color);
+}
 
+/*
+  スコアの伸びる棒グラフ
+ */
+.score-bar {
+  animation: score-bar-grow 1s ease-out forwards;
+}
+@keyframes score-bar-grow {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--target-width);
+  }
+}
+
+.bg-failed {
+  background-color: var(--failed-bg-color);
+}
+.bg-assisted {
+  background-color: var(--assisted-bg-color);
+}
+.bg-easy {
+  background-color: var(--easy-bg-color);
+}
+.bg-clear {
+  background-color: var(--clear-bg-color);
+}
+.bg-hard {
+  background-color: var(--hard-bg-color);
+}
+.bg-ex-hard {
+  background-color: var(--ex-hard-bg-color);
+}
+.bg-fc {
+  /* background-color: #abe4ff; */
+  background: linear-gradient(to right, var(--color-start), var(--color-end));
+  animation: fcAnimation 0.5s linear infinite alternate;
+}
+/*
+  PlayStats DJ Levelゲージの背景色
+*/
+.bg-aaa {
+  background-color: var(--aaa-bg-color);
+}
+.bg-aa {
+  background-color: var(--aa-bg-color);
+}
+.bg-a {
+  background-color: var(--a-bg-color);
+}
+.bg-b {
+  background-color: var(--b-bg-color);
+}
+.bg-c {
+  background-color: var(--c-bg-color);
+}
+.bg-d {
+  background-color: var(--d-bg-color);
+}
+.bg-e {
+  background-color: var(--e-bg-color);
+}
+.bg-f {
+  background-color: var(--f-bg-color);
+}
+
+/* 
+  ローディングのやつ
+ */
 .loader {
   --color-1: #fff;
   --color-2: #00A3FF;
   --size: 1px;
-
   width: calc(48 * var(--size));
   height: calc(48 * var(--size));
   border: calc(3 * var(--size)) solid var(--color-1);
@@ -119,61 +304,4 @@
   100% {
     transform: rotate(360deg);
   }
-}
-
-.score-bar {
-  animation: score-bar-grow 1s ease-out forwards;
-}
-
-@keyframes score-bar-grow {
-  from {
-    width: 0;
-  }
-  to {
-    width: var(--target-width);
-  }
-}
-
-.bg-failed {
-  background-color: #FF4B00;
-}
-.bg-assisted {
-  background-color: #9D23F5;
-}
-.bg-easy {
-  background-color: #3CF523;
-}
-.bg-clear {
-  background-color: #23AFF5;
-}
-.bg-hard {
-  background-color: #D1D1D1;
-}
-.bg-ex-hard {
-  background-color: #FFD300;
-}
-.bg-fc {
-  background-color: #abe4ff;
-}
-
-.bg-aaa {
-  background-color: #FFC100;
-}
-.bg-aa {
-  background-color: #B2B2B2;
-}
-.bg-a {
-  background-color: #4EC7AD;
-}
-.bg-b {
-  background-color: #D8FFFF;
-}
-.bg-c {
-  background-color: #8BFFFF;
-}
-.bg-d {
-  background-color: #00F8FF;
-}
-.bg-e {
-  background-color: #48A2FF;
 }

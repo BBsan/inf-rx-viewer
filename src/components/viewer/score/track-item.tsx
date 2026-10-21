@@ -136,7 +136,7 @@ function getDifficultyCssName(chart: Chart) {
 function getClearLampFullName(lamp: string) {
   switch (lamp) {
     case "F":
-      return <span className="failed">FAILED</span>;
+      return <span className="failed gradient-text" data-text="FAILED">FAILED</span>;
     case "AC":
       return <span className="assisted">A-CLEAR</span>;
     case "EC":
@@ -146,9 +146,9 @@ function getClearLampFullName(lamp: string) {
     case "HC":
       return <span className="hard">H-CLEAR</span>;
     case "EX":
-      return <span className="ex-hard">EX-CLEAR</span>;
+      return <span className="ex-hard gradient-text" data-text="EX-CLEAR">EX-CLEAR</span>;
     case "FC":
-      return <span className="fc">F-COMBO</span>;
+      return <span className="fc gradient-text" data-text="F-COMBO">F-COMBO</span>;
   }
   return <span className="no-play">NO PLAY</span>;
 }
