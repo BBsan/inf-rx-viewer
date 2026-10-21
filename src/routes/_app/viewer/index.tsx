@@ -13,10 +13,10 @@ function ViewerIndex() {
         <div>
           <h3 className="text-3xl">INFORMATION</h3>
           <p className="font-yu p-4">
-            デモ用のTSVファイル（製作者、INFINITAS SP十段）を読み込みました。
+            デモ用データ（INF SP十段）を読み込みました。
             <br />
             <br />
-            データ更新日: 2026/10/07
+            リアルタイム更新ではないため最新データではない場合があります。
           </p>
         </div>
       )}
