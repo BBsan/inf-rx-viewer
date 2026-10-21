@@ -14,7 +14,7 @@ function SimpleOBS() {
     url: "",
     obsKey: "",
   });
-  const { obs, isRecording, toggleRecord, isStreaming, toggleStream } =
+  const { obs, isRecording, toggleRecord } =
     useOBS();
   const [previewImage, setPreviewImage] = useState<string | undefined>(
     undefined,
