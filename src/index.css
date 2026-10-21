@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+:root {
+  --main-bg-color: linear-gradient(to bottom, rgb(23, 38, 89) 0%,rgba(1, 7, 20) 100%);
+  --header-bg-color: #000000;
+  --table-border-color: #818285;
+  --table-th-bg-color: #000000;
+  --table-td-bg-color: #404040;
+  --btn-normal: lightgray;
+  --btn-submit: #008800;
+  --btn-cancel: #880000;
+  --btn-normal-hover: silver;
+  --btn-submit-hover: #00dd00;
+  --btn-cancel-hover: #dd0000;
+  --link-active-color: linear-gradient(to right, rgba(1, 235, 246, 0.5) 0%,rgba(0, 43, 109, 0.5) 100%);
+  --stats-table-bg: linear-gradient(to right bottom, rgba(170, 170, 170, 0.5) 0%,rgba(65, 67, 70, 0.5) 100%);
+  --stats-link-active-color: linear-gradient(to right bottom, rgba(0, 174, 184, 0.5) 0%,rgba(0, 43, 109, 0.5) 100%);
+  --track-item-bg: linear-gradient(to right bottom, rgba(0, 174, 184, 0.5) 0%,rgba(0, 43, 109, 0.5) 100%);
+
+  --beginner-color:#7bf1a8;
+  --normal-color: #8ec5ff;
+  --hyper-color: #ffdf20;
+  --another-color: #ff2828;
+  --leggendaria-color: #cb10fa;
+  --beginner-bg-color:#5db67f;
+  --normal-bg-color: #6990bb;
+  --hyper-bg-color: #b19a17;
+  --another-bg-color: #b41c1c;
+  --leggendaria-bg-color: #940bb6;
+}
+
+.font-lub {
+  font-family: 'WDXL Lubrifont JP N';
+}
+
+.font-yu {
+  font-family: 'Yu Gothic UI';
+}
+.text-shadow-3 {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.99);
+}
+.failed {
+  color: #FF4B00;
+}
+.fc {
+  color: #60C9FA;
+}
+.assisted {
+  color: #9D23F5;
+}
+.easy {
+  color: #3CF523;
+}
+.clear {
+  color: #23AFF5;
+}
+.hard {
+  color: #E1E1E1;
+}
+.ex-hard {
+  color: #FFD300;
+}
+
+.no-play {
+  color: #909090;
+}
+
+.beginner {
+  color: var(--beginner-color);
+}
+
+.normal {
+  color: var(--normal-color);
+}
+
+.hyper {
+  color: var(--hyper-color);
+}
+
+.another {
+  color: var(--another-color);
+}
+
+.leggendaria {
+  color: var(--leggendaria-color);
+}
+
+.loader {
+  --color-1: #fff;
+  --color-2: #00A3FF;
+  --size: 1px;
+
+  width: calc(48 * var(--size));
+  height: calc(48 * var(--size));
+  border: calc(3 * var(--size)) solid var(--color-1);
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(56 * var(--size));
+  height: calc(56 * var(--size));
+  border-radius: 50%;
+  border: calc(3 * var(--size)) solid;
+  border-color: var(--color-2) transparent;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.score-bar {
+  animation: score-bar-grow 1s ease-out forwards;
+}
+
+@keyframes score-bar-grow {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--target-width);
+  }
+}
+
+.bg-failed {
+  background-color: #FF4B00;
+}
+.bg-assisted {
+  background-color: #9D23F5;
+}
+.bg-easy {
+  background-color: #3CF523;
+}
+.bg-clear {
+  background-color: #23AFF5;
+}
+.bg-hard {
+  background-color: #D1D1D1;
+}
+.bg-ex-hard {
+  background-color: #FFD300;
+}
+.bg-fc {
+  background-color: #abe4ff;
+}
+
+.bg-aaa {
+  background-color: #FFC100;
+}
+.bg-aa {
+  background-color: #B2B2B2;
+}
+.bg-a {
+  background-color: #4EC7AD;
+}
+.bg-b {
+  background-color: #D8FFFF;
+}
+.bg-c {
+  background-color: #8BFFFF;
+}
+.bg-d {
+  background-color: #00F8FF;
+}
+.bg-e {
+  background-color: #48A2FF;
+}
