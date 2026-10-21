@@ -88,7 +88,7 @@ export function RefluxContextProvider({
   }
   async function loadDemoData() {
     setIsLoading(true);
-    const res = await fetch("/tracker.tsv");
+    const res = await fetch("./tracker.tsv");
     if (!res.ok) {
       reset();
       return;

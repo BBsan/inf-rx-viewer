@@ -10,6 +10,7 @@ import NotFound from "./components/not-found.tsx";
 const router = createRouter({
   routeTree,
   defaultNotFoundComponent: () => <NotFound />,
+  basepath: "/inf-rx-viewer/"
 });
 declare module "@tanstack/react-router" {
   interface Register {
