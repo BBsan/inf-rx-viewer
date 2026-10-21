@@ -275,24 +275,28 @@ function FilterLink({
       to="/viewer/score/$mode/{-$rating}/{-$difficulty}/{-$lamp}/{-$letter}/{-$title}"
       params={{
         mode: mode,
-        rating: rating
-          ? rating
-          : difficulty
-            ? ""
-            : lamp
-              ? ""
-              : letter
-                ? ""
+        rating: rating && rating !== "_"
+            ? rating
+            : difficulty && difficulty !== "_"
+              ? "_"
+              : lamp && lamp !== "_"
+                ? "_"
+                : letter && letter !== "_"
+                  ? "_"
+                  : undefined,
+        difficulty: difficulty && difficulty !== "_"
+            ? difficulty
+            : lamp && lamp !== "_"
+              ? "_"
+              : letter && letter !== "_"
+                ? "_"
                 : undefined,
-        difficulty: difficulty
-          ? difficulty
-          : lamp
-            ? ""
-            : letter
-              ? ""
+        lamp: lamp && lamp !== "_"
+            ? lamp
+            : letter && letter !== "_"
+              ? "_"
               : undefined,
-        lamp: lamp ? lamp : letter ? "" : undefined,
-        letter: letter,
+        letter: letter && letter !== "_" ? letter : undefined,
       }}
       className="hover:bg-(image:--stats-link-active-color) px-2"
     >
