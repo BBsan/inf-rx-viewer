@@ -5,11 +5,7 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 
 import { useRefluxContext } from "@/contexts/reflux-context";
 import ScoreDetail from "./track-item";
-import {
-  DIFFICULTY_LETTERS,
-  type Chart,
-  type Track,
-} from "@/lib/types";
+import { DIFFICULTY_LETTERS, type Chart, type Track } from "@/lib/types";
 
 export default function TrackList() {
   const [columns, setColumns] = useState(2);
@@ -48,26 +44,26 @@ export default function TrackList() {
 
   const filteredTracks = useMemo<Partial<Track>[]>(() => {
     let filteredTracks: Partial<Track>[] = [...tracks];
-    if (rating) {
+    if (rating && rating !== "_") {
       filteredTracks = filteredTracks.filter((track) =>
         ratingFilter(track, mode, rating),
       );
     }
-    if (difficulty) {
+    if (difficulty && difficulty !== "_") {
       filteredTracks = filteredTracks
-        .filter((track) => difficultyFilter(track, mode, rating, difficulty))
+        .filter((track) => difficultyFilter(track, mode, rating !== "_" ? rating : undefined, difficulty))
         .map((track) => reduceTrackByTargetDifficulty(track, mode, difficulty));
-    } else if (rating) {
+    } else if (rating && rating !== "_") {
       filteredTracks = filteredTracks.map((track) =>
         reduceTrackByAllDifficulty(track, mode, rating),
       );
     }
-    if (lamp) {
+    if (lamp && lamp !== "_") {
       filteredTracks = filteredTracks
         .filter((track) => clearLampFilter(track, mode, lamp))
         .map((track) => reduceTrackByClearLamp(track, mode, lamp));
     }
-    if (letter) {
+    if (letter&& letter !== "_") {
       filteredTracks = filteredTracks
         .filter((track) => letterFilter(track, mode, letter))
         .map((track) => reduceTrackByLetter(track, mode, letter));
@@ -139,12 +135,26 @@ export default function TrackList() {
                         chart={chart}
                         rating={track[`${chart}_rating`] as string}
                         lamp={track[`${chart}_lamp`] as string}
-                        letter={isNoPlay ? "-" : track[`${chart}_letter`] as string}
-                        missCount={isNoPlay ? "-" : track[`${chart}_miss_count`] as string}
-                        score={isNoPlay ? undefined : track[`${chart}_ex_score`]}
-                        scoreRate={isNoPlay ? undefined : track[`${chart}_score_rate`]}
-                        letterDiff={isNoPlay ? undefined : track[`${chart}_letter_diff`]}
-                        scoreDiff={isNoPlay ? undefined : track[`${chart}_score_diff`]}
+                        letter={
+                          isNoPlay ? "-" : (track[`${chart}_letter`] as string)
+                        }
+                        missCount={
+                          isNoPlay
+                            ? "-"
+                            : (track[`${chart}_miss_count`] as string)
+                        }
+                        score={
+                          isNoPlay ? undefined : track[`${chart}_ex_score`]
+                        }
+                        scoreRate={
+                          isNoPlay ? undefined : track[`${chart}_score_rate`]
+                        }
+                        letterDiff={
+                          isNoPlay ? undefined : track[`${chart}_letter_diff`]
+                        }
+                        scoreDiff={
+                          isNoPlay ? undefined : track[`${chart}_score_diff`]
+                        }
                       />
                     );
                   })}

@@ -21,25 +21,39 @@ export default function useDebounce() {
       to: "/viewer/score/$mode/{-$rating}/{-$difficulty}/{-$lamp}/{-$letter}/{-$title}",
       params: {
         mode,
-        rating: rating
-          ? rating
-          : difficulty
-            ? ""
-            : lamp
-              ? ""
-              : letter
-                ? ""
-                : debounceTerm ? "" : undefined,
-        difficulty: difficulty
-          ? difficulty
-          : lamp
-            ? ""
-            : letter
-              ? ""
-              : debounceTerm ? "" : undefined,
-        lamp: lamp ? lamp : letter ? "" : debounceTerm ? "" : undefined,
-        letter: letter ? letter : debounceTerm ? "" : undefined,
-        title: debounceTerm
+        rating:
+          rating && rating !== "_"
+            ? rating
+            : difficulty && difficulty !== "_"
+              ? "_"
+              : lamp && lamp !== "_"
+                ? "_"
+                : letter && letter !== "_"
+                  ? "_"
+                  : debounceTerm
+                    ? "_"
+                    : undefined,
+        difficulty:
+          difficulty && difficulty !== "_"
+            ? difficulty
+            : lamp && lamp !== "_"
+              ? "_"
+              : letter && letter !== "_"
+                ? "_"
+                : debounceTerm
+                  ? "_"
+                  : undefined,
+        lamp:
+          lamp && lamp !== "_"
+            ? lamp
+            : letter && letter !== "_"
+              ? "_"
+              : debounceTerm
+                ? "_"
+                : undefined,
+        letter:
+          letter && letter !== "_" ? letter : debounceTerm ? "_" : undefined,
+        title: debounceTerm,
       },
     });
   }, [debounceTerm]);

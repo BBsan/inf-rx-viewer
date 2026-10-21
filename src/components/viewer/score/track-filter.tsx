@@ -16,18 +16,26 @@ export default function TrackListFilter() {
             <FilterMenuLink
               params={{
                 mode,
-                rating: "",
+                rating: difficulty
+                  ? "_"
+                  : lamp
+                    ? "_"
+                    : letter
+                      ? "_"
+                      : title
+                        ? "_"
+                        : undefined,
                 difficulty: difficulty
                   ? difficulty
                   : lamp
-                    ? ""
+                    ? "_"
                     : letter
-                      ? ""
+                      ? "_"
                       : title
-                        ? ""
+                        ? "_"
                         : undefined,
-                lamp: lamp ? lamp : letter ? "" : title ? "" : undefined,
-                letter: letter ? letter : title ? "" : undefined,
+                lamp: lamp ? lamp : letter ? "_" : title ? "_" : undefined,
+                letter: letter ? letter : title ? "_" : undefined,
                 title: title,
               }}
             >
@@ -43,14 +51,14 @@ export default function TrackListFilter() {
                   difficulty: difficulty
                     ? difficulty
                     : lamp
-                      ? ""
+                      ? "_"
                       : letter
-                        ? ""
+                        ? "_"
                         : title
-                          ? ""
+                          ? "_"
                           : undefined,
-                  lamp: lamp ? lamp : letter ? "" : title ? "" : undefined,
-                  letter: letter ? letter : title ? "" : undefined,
+                  lamp: lamp ? lamp : letter ? "_" : title ? "_" : undefined,
+                  letter: letter ? letter : title ? "_" : undefined,
                 }}
               >
                 <span className="inline-block w-7">★ {i + 1}</span>
@@ -65,18 +73,18 @@ export default function TrackListFilter() {
             <FilterMenuLink
               params={{
                 mode,
-                rating: rating
+                rating: rating && rating !== "_"
                   ? rating
                   : lamp
-                    ? ""
+                    ? "_"
                     : letter
-                      ? ""
+                      ? "_"
                       : title
-                        ? ""
+                        ? "_"
                         : undefined,
-                difficulty: lamp ? "" : letter ? "" : title ? "" : undefined,
-                lamp: lamp ? lamp : letter ? "" : title ? "" : undefined,
-                letter: letter ? letter : title ? "" : undefined,
+                difficulty: lamp ? "_" : letter ? "_" : title ? "_" : undefined,
+                lamp: lamp ? lamp : letter ? "_" : title ? "_" : undefined,
+                letter: letter ? letter : title ? "_" : undefined,
                 title: title,
               }}
             >
@@ -92,10 +100,10 @@ export default function TrackListFilter() {
                 <FilterMenuLink
                   params={{
                     mode,
-                    rating: rating ? rating : "",
+                    rating: rating ? rating : "_",
                     difficulty: DIFFICULTY_LETTERS[index],
-                    lamp: lamp ? lamp : letter ? "" : title ? "" : undefined,
-                    letter: letter ? letter : title ? "" : undefined,
+                    lamp: lamp ? lamp : letter ? "_" : title ? "_" : undefined,
+                    letter: letter ? letter : title ? "_" : undefined,
                     title: title,
                   }}
                 >
@@ -110,24 +118,24 @@ export default function TrackListFilter() {
             <FilterMenuLink
               params={{
                 mode,
-                rating: rating
+                rating: rating && rating !== "_"
                   ? rating
-                  : difficulty
-                    ? ""
-                    : lamp
-                      ? ""
+                  : difficulty && difficulty !== "_"
+                    ? "_"
+                    : lamp && lamp !== "_"
+                      ? "_"
                       : title
-                        ? ""
+                        ? "_"
                         : undefined,
-                difficulty: difficulty
+                difficulty: difficulty && difficulty !== "_"
                   ? difficulty
-                  : lamp
-                    ? ""
+                  : lamp && lamp !== "_"
+                    ? "_"
                     : title
-                      ? ""
+                      ? "_"
                       : undefined,
-                lamp: lamp ? lamp : title ? "" : undefined,
-                letter: title ? "" : undefined,
+                lamp: lamp && lamp !== "_" ? lamp : title ? "_" : undefined,
+                letter: title ? "_" : undefined,
                 title: title,
               }}
             >
@@ -138,11 +146,11 @@ export default function TrackListFilter() {
             <FilterMenuLink
               params={{
                 mode,
-                rating: rating ? rating : "",
-                difficulty: difficulty ? difficulty : "",
-                lamp: lamp ? lamp : "",
+                rating: rating ? rating : "_",
+                difficulty: difficulty ? difficulty : "_",
+                lamp: lamp ? lamp : "_",
                 letter: "less",
-                title: title
+                title: title,
               }}
             >
               <span className="inline-block">B or LESS</span>
@@ -152,11 +160,11 @@ export default function TrackListFilter() {
             <FilterMenuLink
               params={{
                 mode,
-                rating: rating ? rating : "",
-                difficulty: difficulty ? difficulty : "",
-                lamp: lamp ? lamp : "",
+                rating: rating ? rating : "_",
+                difficulty: difficulty ? difficulty : "_",
+                lamp: lamp ? lamp : "_",
                 letter: "a",
-                title: title
+                title: title,
               }}
             >
               <span className="inline-block w-7">A</span>
@@ -166,11 +174,11 @@ export default function TrackListFilter() {
             <FilterMenuLink
               params={{
                 mode,
-                rating: rating ? rating : "",
-                difficulty: difficulty ? difficulty : "",
-                lamp: lamp ? lamp : "",
+                rating: rating ? rating : "_",
+                difficulty: difficulty ? difficulty : "_",
+                lamp: lamp ? lamp : "_",
                 letter: "aa",
-                title: title
+                title: title,
               }}
             >
               <span className="inline-block w-7">AA</span>
@@ -180,11 +188,11 @@ export default function TrackListFilter() {
             <FilterMenuLink
               params={{
                 mode,
-                rating: rating ? rating : "",
-                difficulty: difficulty ? difficulty : "",
-                lamp: lamp ? lamp : "",
+                rating: rating ? rating : "_",
+                difficulty: difficulty ? difficulty : "_",
+                lamp: lamp ? lamp : "_",
                 letter: "aaa",
-                title: title
+                title: title,
               }}
             >
               <span className="inline-block w-7">AAA</span>
@@ -198,17 +206,25 @@ export default function TrackListFilter() {
             <FilterMenuLink
               params={{
                 mode,
-                rating: rating
+                rating: rating && rating !== "_"
                   ? rating
-                  : difficulty
-                    ? ""
-                    : letter
-                      ? ""
-                      : title ? "" : undefined,
-                difficulty: difficulty ? difficulty : letter ? "" : title ? "" : undefined,
-                lamp: letter ? "" : title ? "" : undefined,
-                letter: letter ? letter : title ? "" : undefined,
-                title: title
+                  : difficulty && difficulty !== "_"
+                    ? "_"
+                    : letter && letter !== "_"
+                      ? "_"
+                      : title
+                        ? "_"
+                        : undefined,
+                difficulty: difficulty && difficulty !== "_"
+                  ? difficulty
+                  : letter && letter !== "_"
+                    ? "_"
+                    : title
+                      ? "_"
+                      : undefined,
+                lamp: letter ? "_" : title ? "_" : undefined,
+                letter: letter ? letter : title ? "_" : undefined,
+                title: title,
               }}
             >
               <span className="inline-block">ALL LAMP</span>
@@ -221,11 +237,11 @@ export default function TrackListFilter() {
                 <FilterMenuLink
                   params={{
                     mode,
-                    rating: rating ? rating : "",
-                    difficulty: difficulty ? difficulty : "",
+                    rating: rating ? rating : "_",
+                    difficulty: difficulty ? difficulty : "_",
                     lamp: lampParams,
-                    letter: letter ? letter : title ? "" : undefined,
-                    title: title
+                    letter: letter ? letter : title ? "_" : undefined,
+                    title: title,
                   }}
                 >
                   <span className="inline-block">{_lamp}</span>
