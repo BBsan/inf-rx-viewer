@@ -8,6 +8,7 @@ export default function useDebounce() {
   });
   const [searchTerm, setSearchTerm] = useState("");
   const [debounceTerm, setDebounceTerm] = useState("");
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -17,6 +18,10 @@ export default function useDebounce() {
   }, [searchTerm]);
 
   useEffect(() => {
+    if (!isMounted) {
+      setIsMounted(true);
+      return;
+    }
     navigate({
       to: "/viewer/score/$mode/{-$rating}/{-$difficulty}/{-$lamp}/{-$letter}/{-$title}",
       params: {
