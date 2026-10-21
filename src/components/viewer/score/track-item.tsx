@@ -1,78 +1,8 @@
 import type { CSSProperties } from "react";
 
-import {
-  DIFFICULTY_LETTERS,
-  type Chart,
-  type DifficultyLetter,
-  type PlayMode,
-  type Track,
-} from "@/lib/types";
+import { type Chart } from "@/lib/types";
 
-export default function TrackListItem({
-  data,
-  mode,
-}: {
-  data?: Partial<Track>;
-  mode: PlayMode;
-}) {
-  if (!data) {
-    return null;
-  }
-  return (
-    <div className="bg-(image:--track-item-bg) p-2 px-4 rounded-lg select-none">
-      <span className="text-3xl">{data.title}</span>
-      {DIFFICULTY_LETTERS.map((letter) => (
-        <ChartScore
-          key={`vis-${letter}`}
-          data={data}
-          mode={mode}
-          letter={letter}
-        />
-      ))}
-    </div>
-  );
-}
-
-function ChartScore({
-  data,
-  mode,
-  letter,
-}: {
-  data: Partial<Track>;
-  mode: PlayMode;
-  letter: DifficultyLetter;
-}) {
-  const chart = (mode + letter) as "dpb" & Chart;
-  if (chart === "dpb" || !data[`${chart}_rating`]) {
-    return null;
-  }
-  if (data[`${chart}_lamp`] === "NP") {
-    return (
-      <ScoreDetail
-        chart={chart}
-        rating={data[`${chart}_rating`] as string}
-        lamp={data[`${chart}_lamp`] as string}
-        letter="-"
-        missCount="-"
-      />
-    );
-  }
-  return (
-    <ScoreDetail
-      chart={chart}
-      rating={data[`${chart}_rating`] as string}
-      lamp={data[`${chart}_lamp`] as string}
-      letter={data[`${chart}_letter`] as string}
-      missCount={data[`${chart}_miss_count`] as string}
-      score={data[`${chart}_ex_score`]}
-      scoreRate={data[`${chart}_score_rate`]}
-      letterDiff={data[`${chart}_letter_diff`]}
-      scoreDiff={data[`${chart}_score_diff`]}
-    />
-  );
-}
-
-function ScoreDetail({
+export default function ScoreDetail({
   chart,
   rating,
   lamp,

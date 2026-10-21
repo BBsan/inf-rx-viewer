@@ -4,8 +4,12 @@ import { useParams } from "@tanstack/react-router";
 import { useVirtualizer } from "@tanstack/react-virtual";
 
 import { useRefluxContext } from "@/contexts/reflux-context";
-import TrackListItem from "./track-item";
-import { DIFFICULTY_LETTERS, type PlayMode, type Track } from "@/lib/types";
+import ScoreDetail from "./track-item";
+import {
+  DIFFICULTY_LETTERS,
+  type Chart,
+  type Track,
+} from "@/lib/types";
 
 export default function TrackList() {
   const [columns, setColumns] = useState(2);
@@ -31,10 +35,10 @@ export default function TrackList() {
           setColumns(1);
         } else if (width < 1580) {
           setColumns(2);
-        } else if (width < 2110){
+        } else if (width < 2110) {
           setColumns(3);
         } else {
-          setColumns(4)
+          setColumns(4);
         }
       }
     });
@@ -129,11 +133,33 @@ export default function TrackList() {
               className="absolute top-0 left-0 flex gap-2 pb-2"
             >
               {rows[virtualItem.index].map((track, index) => (
-                <TrackListItem
-                  key={index}
-                  data={track}
-                  mode={mode as PlayMode}
-                />
+                <div
+                  key={`t-${index}-${track.title}`}
+                  className="bg-(image:--track-item-bg) p-2 px-4 rounded-lg select-none"
+                >
+                  <span className="text-3xl">{track.title}</span>
+                  {DIFFICULTY_LETTERS.map((letter) => {
+                    const chart = (mode + letter) as "dpb" & Chart;
+                    if (chart === "dpb" || !track[`${chart}_rating`]) {
+                      return null;
+                    }
+                    const isNoPlay = track[`${chart}_lamp`] === "NP";
+                    return (
+                      <ScoreDetail
+                        key={`s-${letter}`}
+                        chart={chart}
+                        rating={track[`${chart}_rating`] as string}
+                        lamp={track[`${chart}_lamp`] as string}
+                        letter={isNoPlay ? "-" : track[`${chart}_letter`] as string}
+                        missCount={isNoPlay ? "-" : track[`${chart}_miss_count`] as string}
+                        score={isNoPlay ? undefined : track[`${chart}_ex_score`]}
+                        scoreRate={isNoPlay ? undefined : track[`${chart}_score_rate`]}
+                        letterDiff={isNoPlay ? undefined : track[`${chart}_letter_diff`]}
+                        scoreDiff={isNoPlay ? undefined : track[`${chart}_score_diff`]}
+                      />
+                    );
+                  })}
+                </div>
               ))}
             </div>
           ))}
