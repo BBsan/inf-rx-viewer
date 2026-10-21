@@ -5,6 +5,7 @@ import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: "/inf-rx-viewer/",
   plugins: [
     tanstackRouter({
       target: "react",
