@@ -287,7 +287,7 @@ function getScoreMetadata(
   return [letter, diff, percentage];
 }
 
-export function getScoreDiffByDJLevelThreshold(
+function getScoreDiffByDJLevelThreshold(
   score: number,
   theoretical: number,
   numerator: number,

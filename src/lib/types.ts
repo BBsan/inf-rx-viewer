@@ -1,8 +1,3 @@
-export type PageName = "stats" | "score";
-
-export type PlayMode = "sp" | "dp";
-
-export type DifficultyLetter = "b" | "n" | "h" | "a" | "l";
 
 export type Chart =
   "spb" | "spn" | "sph" | "spa" | "spl" | "dpn" | "dph" | "dpa" | "dpl";
