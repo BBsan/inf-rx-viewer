@@ -15,7 +15,7 @@ export function SubdivideStatsTable({
   mode: string;
   data: RefluxStats;
 }) {
-  const stats: Partial<RefluxStats> = {};
+  const stats = {} as RefluxStats;
   for (let i = 1; i <= 12; i++) {
     stats[`${mode}_${i}`] = { ...data[`${mode}_${i}`] };
   }
@@ -188,7 +188,7 @@ export function ByLevelTable({
   mode: string;
   data: RefluxStats;
 }) {
-  const stats: Partial<RefluxStats> = {};
+  const stats = {} as RefluxStats;
   for (let i = 1; i <= 12; i++) {
     stats[`${mode}_${i}`] = { ...data[`${mode}_${i}`] };
   }
@@ -223,7 +223,7 @@ export function ByChartTable({
   mode: string;
   data: RefluxStats;
 }) {
-  const stats: Partial<RefluxStats> = {};
+  const stats = {} as RefluxStats;
   if (mode === "sp") {
     stats[`${mode}b`] = { ...data[`${mode}b`] };
   }

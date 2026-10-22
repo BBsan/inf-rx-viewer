@@ -56,7 +56,7 @@ export function ByLevelGraph({
   mode: string;
   data: RefluxStats;
 }) {
-  const stats: Partial<RefluxStats> = {};
+  const stats = {} as RefluxStats;
   for (let i = 1; i <= 12; i++) {
     stats[`${mode}_${i}`] = { ...data[`${mode}_${i}`] };
   }
@@ -101,7 +101,7 @@ export function ByChartGraph({
   mode: string;
   data: RefluxStats;
 }) {
-  const stats: Partial<RefluxStats> = {};
+  const stats = {} as RefluxStats;
   if (mode === "sp") {
     stats[`${mode}b`] = { ...data[`${mode}b`] };
   }

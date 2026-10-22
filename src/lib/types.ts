@@ -11,116 +11,7 @@ export const PLAY_MODES = ["sp", "dp"] as const;
 
 export const DIFFICULTY_LETTERS = ["b", "n", "h", "a", "l"] as const;
 
-export type Track = {
-  [key: string]: string;
-  title: string;
-  type: string;
-  label: string;
-  cost_normal: string;
-  cost_hyper: string;
-  cost_another: string;
-  sp_dj_points: string;
-  dp_dj_points: string;
-  sbp_unlocked: string;
-  spb_rating: string;
-  spb_lamp: string;
-  spb_letter: string;
-  spb_ex_score: string;
-  spb_miss_count: string;
-  spb_note_count: string;
-  spb_dj_points: string;
-  spn_unlocked: string;
-  spn_rating: string;
-  spn_lamp: string;
-  spn_letter: string;
-  spn_ex_score: string;
-  spn_miss_count: string;
-  spn_note_count: string;
-  spn_dj_points: string;
-  sph_unlocked: string;
-  sph_rating: string;
-  sph_lamp: string;
-  sph_letter: string;
-  sph_ex_score: string;
-  sph_miss_count: string;
-  sph_note_count: string;
-  spa_rating: string;
-  spa_lamp: string;
-  spa_letter: string;
-  spa_ex_score: string;
-  spa_miss_count: string;
-  spa_note_count: string;
-  spa_dj_points: string;
-  spl_unlocked: string;
-  spl_rating: string;
-  spl_lamp: string;
-  spl_letter: string;
-  spl_ex_score: string;
-  spl_miss_count: string;
-  spl_note_count: string;
-  spl_dj_points: string;
-  dpn_unlocked: string;
-  dpn_rating: string;
-  dpn_lamp: string;
-  dpn_letter: string;
-  dpn_ex_score: string;
-  dpn_miss_count: string;
-  dpn_note_count: string;
-  dpn_dj_points: string;
-  dph_unlocked: string;
-  dph_rating: string;
-  dph_lamp: string;
-  dph_letter: string;
-  dph_ex_score: string;
-  dph_miss_count: string;
-  dph_note_count: string;
-  dph_dj_points: string;
-  dpa_unlocked: string;
-  dpa_rating: string;
-  dpa_lamp: string;
-  dpa_letter: string;
-  dpa_ex_score: string;
-  dpa_miss_count: string;
-  dpa_note_count: string;
-  dpa_dj_points: string;
-  dpl_unlocked: string;
-  dpl_rating: string;
-  dpl_lamp: string;
-  dpl_letter: string;
-  dpl_ex_score: string;
-  dpl_miss_count: string;
-  dpl_note_count: string;
-  dpl_dj_points: string;
-  spb_score_rate: string;
-  spb_letter_diff: string;
-  spb_score_diff: string;
-  spn_score_rate: string;
-  spn_letter_diff: string;
-  spn_score_diff: string;
-  sph_score_rate: string;
-  sph_letter_diff: string;
-  sph_score_diff: string;
-  spa_score_rate: string;
-  spa_letter_diff: string;
-  spa_score_diff: string;
-  spl_score_rate: string;
-  spl_letter_diff: string;
-  spl_score_diff: string;
-  dpn_score_rate: string;
-  dpn_letter_diff: string;
-  dpn_score_diff: string;
-  dph_score_rate: string;
-  dph_letter_diff: string;
-  dph_score_diff: string;
-  dpa_score_rate: string;
-  dpa_letter_diff: string;
-  dpa_score_diff: string;
-  dpl_score_rate: string;
-  dpl_letter_diff: string;
-  dpl_score_diff: string;
-};
-
-export const initialTrackData: Track = {
+export const initialTrackData = {
   title: "",
   type: "",
   label: "",
@@ -226,45 +117,14 @@ export const initialTrackData: Track = {
   dpl_score_rate: "",
   dpl_letter_diff: "",
   dpl_score_diff: "",
-};
+} as const;
+export type Track = Record<string, string> &
+  Record<
+    keyof typeof initialTrackData,
+    string
+  >;
 
-export type StatsDetail = {
-  [key: string]: number;
-  no_play: number;
-  failed: number;
-  assisted: number;
-  easy: number;
-  clear: number;
-  hard: number;
-  ex_hard: number;
-  full_combo: number;
-  dj_f: number;
-  dj_e: number;
-  dj_d: number;
-  dj_c: number;
-  dj_b: number;
-  dj_a: number;
-  dj_aa: number;
-  dj_aaa: number;
-  max: number;
-  "max-": number;
-  "aaa+": number;
-  "aaa-": number;
-  "aa+": number;
-  "aa-": number;
-  "a+": number;
-  "a-": number;
-  "b+": number;
-  "b-": number;
-  "c+": number;
-  "c-": number;
-  "d+": number;
-  "d-": number;
-  "e+": number;
-  "e-": number;
-};
-
-export const initialStatsDetail: StatsDetail = {
+export const initialStatsDetail = {
   no_play: 0,
   failed: 0,
   assisted: 0,
@@ -297,7 +157,12 @@ export const initialStatsDetail: StatsDetail = {
   "d-": 0,
   "e+": 0,
   "e-": 0,
-};
+} as const;
+export type StatsDetail = Record<string, number> &
+  Record<
+    keyof typeof initialStatsDetail,
+    number
+  >;
 
 export type RefluxStats = {
   [key: string]: StatsDetail;

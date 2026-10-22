@@ -42,8 +42,8 @@ export default function TrackList() {
     return () => resizeObserver.disconnect();
   }, []);
 
-  const filteredTracks = useMemo<Partial<Track>[]>(() => {
-    let filteredTracks: Partial<Track>[] = [...tracks];
+  const filteredTracks = useMemo<Track[]>(() => {
+    let filteredTracks: Track[] = [...tracks];
     if (rating && rating !== "_") {
       filteredTracks = filteredTracks.filter((track) =>
         ratingFilter(track, mode, rating),
@@ -174,7 +174,7 @@ function chunkArray(arr: any[], size: number) {
   );
 }
 
-function reduceTrack(track: Partial<Track>, chart: string) {
+function reduceTrack(track: Track, chart: string) {
   return {
     [`${chart}_rating`]: track[`${chart}_rating`],
     [`${chart}_lamp`]: track[`${chart}_lamp`],
@@ -184,10 +184,10 @@ function reduceTrack(track: Partial<Track>, chart: string) {
     [`${chart}_score_rate`]: track[`${chart}_score_rate`],
     [`${chart}_letter_diff`]: track[`${chart}_letter_diff`],
     [`${chart}_score_diff`]: track[`${chart}_score_diff`],
-  } as Partial<Track>;
+  } as Track;
 }
 
-function ratingFilter(track: Partial<Track>, mode: string, rating: string) {
+function ratingFilter(track: Track, mode: string, rating: string) {
   if (mode === "sp" && track[`${mode}b_rating`] === rating) {
     return true;
   }
@@ -203,7 +203,7 @@ function ratingFilter(track: Partial<Track>, mode: string, rating: string) {
 }
 
 function difficultyFilter(
-  track: Partial<Track>,
+  track: Track,
   mode: string,
   rating: string | undefined,
   difficulty: string,
@@ -215,24 +215,24 @@ function difficultyFilter(
 }
 
 function reduceTrackByTargetDifficulty(
-  track: Partial<Track>,
+  track: Track,
   mode: string,
   difficulty: string,
 ) {
   const chart = mode + difficulty;
-  const reducedTrack: Partial<Track> = {
-    title: track.title,
+  const reducedTrack: Track = {
+    // title: track.title,
     ...reduceTrack(track, chart),
   };
   return reducedTrack;
 }
 
 function reduceTrackByAllDifficulty(
-  track: Partial<Track>,
+  track: Track,
   mode: string,
   rating: string,
 ) {
-  let reducedTrack: Partial<Track> = { title: track.title };
+  let reducedTrack = { title: track.title } as Track;
   DIFFICULTY_LETTERS.forEach((letter) => {
     const chart = mode + letter;
     if (chart === "dpb") {
@@ -269,7 +269,7 @@ function convertLamp(lamp: string) {
   }
   return "NP";
 }
-function clearLampFilter(track: Partial<Track>, mode: string, lamp: string) {
+function clearLampFilter(track: Track, mode: string, lamp: string) {
   const refluxLamp = convertLamp(lamp);
   if (mode === "sp" && track[`${mode}b_lamp`] === refluxLamp) {
     return true;
@@ -286,11 +286,11 @@ function clearLampFilter(track: Partial<Track>, mode: string, lamp: string) {
 }
 
 function reduceTrackByClearLamp(
-  track: Partial<Track>,
+  track: Track,
   mode: string,
   lamp: string,
 ) {
-  let reducedTrack: Partial<Track> = { title: track.title };
+  let reducedTrack = { title: track.title } as Track;
   const refluxLamp = convertLamp(lamp);
   DIFFICULTY_LETTERS.forEach((dLetter) => {
     const chart = mode + dLetter;
@@ -307,14 +307,14 @@ function reduceTrackByClearLamp(
   return reducedTrack;
 }
 
-function letterFilter(track: Partial<Track>, mode: string, letter: string) {
+function letterFilter(track: Track, mode: string, letter: string) {
   if (letter === "max" || letter.includes("+") || letter.includes("-")) {
     return subdividedFilter(track, mode, letter);
   }
   return djLevelFilter(track, mode, letter);
 }
 
-function subdividedFilter(track: Partial<Track>, mode: string, letter: string) {
+function subdividedFilter(track: Track, mode: string, letter: string) {
   const upperCaseLetter = letter.toUpperCase();
   if (mode === "sp" && track[`${mode}b_letter_diff`] === upperCaseLetter) {
     return true;
@@ -330,7 +330,7 @@ function subdividedFilter(track: Partial<Track>, mode: string, letter: string) {
   return false;
 }
 
-function djLevelFilter(track: Partial<Track>, mode: string, letter: string) {
+function djLevelFilter(track: Track, mode: string, letter: string) {
   const upperCaseLetter = letter.toUpperCase();
   if (upperCaseLetter !== "LESS") {
     if (mode === "sp" && track[`${mode}b_letter`] === upperCaseLetter) {
@@ -379,7 +379,7 @@ function djLevelFilter(track: Partial<Track>, mode: string, letter: string) {
 }
 
 function reduceTrackByLetter(
-  track: Partial<Track>,
+  track: Track,
   mode: string,
   letter: string,
 ) {
@@ -390,11 +390,11 @@ function reduceTrackByLetter(
 }
 
 function reduceTrackBySubdivided(
-  track: Partial<Track>,
+  track: Track,
   mode: string,
   letter: string,
 ) {
-  let reducedTrack: Partial<Track> = { title: track.title };
+  let reducedTrack = { title: track.title } as Track;
   DIFFICULTY_LETTERS.forEach((dLetter) => {
     const chart = mode + dLetter;
     if (chart === "dpb") {
@@ -411,11 +411,11 @@ function reduceTrackBySubdivided(
 }
 
 function reduceTrackByDjLevel(
-  track: Partial<Track>,
+  track: Track,
   mode: string,
   letter: string,
 ) {
-  let reducedTrack: Partial<Track> = { title: track.title };
+  let reducedTrack = { title: track.title } as Track;
   DIFFICULTY_LETTERS.forEach((dLetter) => {
     const chart = mode + dLetter;
     if (chart === "dpb") {
