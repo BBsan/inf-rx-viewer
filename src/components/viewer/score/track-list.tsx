@@ -219,9 +219,10 @@ function reduceTrackByTargetDifficulty(
   mode: string,
   difficulty: string,
 ) {
+  let reducedTrack = { title: track.title } as Track;
   const chart = mode + difficulty;
-  const reducedTrack: Track = {
-    // title: track.title,
+  reducedTrack = {
+    ...reducedTrack,
     ...reduceTrack(track, chart),
   };
   return reducedTrack;
